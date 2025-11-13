@@ -58,11 +58,50 @@ class SatSolver(SatSolverAbstractClass):
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         
-
-        dictionaryClauses = {}
         variationsTriedStack = []
+        while True:
+            
+            if not (n_vars > 0):
+                 return
+            
+            var = 1
+            varValue = True
+            assigment = {}
+            
+            variationsTriedStack.append((var, varValue))
+
+            
+
+
+            def isSolve():
+                overallGood = 0
+                for clause in clauses:
+
+                    if var in clause and varValue == 1:
+                        overallGood += 1
+                    elif (var * -1) in clause and varValue == 0:
+                        overallGood += 1
+                        
+                    
+                if overallGood == len(clauses):
+                    return True
+                else:
+                    return False
+            def 
 
         
+
+
+                    if varValue == 0:
+                        a = not(solutions[abs(val)])
+                        if a: good = 1
+                    else:
+                        a = solutions[abs(val)]
+                        if a: good = 1
+                if not good:
+                    break # break out of the for loop
+                
+
 
         # guess one assignment, add that to the stack , test all causes until you hit a clause that turns false with that assinment, 
         # pop it from stack
@@ -70,6 +109,7 @@ class SatSolver(SatSolverAbstractClass):
         # add that to the stack with the guess then all the types of the other variables,
         # if
         # try 3 
+        '''
         variable1 = -2
         for i, clause in enumerate(clauses):
             GoodClause = False
@@ -115,7 +155,7 @@ class SatSolver(SatSolverAbstractClass):
         return (Satisfiability, dictionaryClauses)
     #Try 3
     # get all assignments, try one, 
-
+'''
 
                 
 
