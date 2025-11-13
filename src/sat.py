@@ -57,7 +57,68 @@ class SatSolver(SatSolverAbstractClass):
 
 
     def sat_backtracking(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
-        pass
+        
+
+        dictionaryClauses = {}
+        variationsTriedStack = []
+
+        
+
+        # guess one assignment, add that to the stack , test all causes until you hit a clause that turns false with that assinment, 
+        # pop it from stack
+        # if you test all the clauses and they come back as not false
+        # add that to the stack with the guess then all the types of the other variables,
+        # if
+        # try 3 
+        variable1 = -2
+        for i, clause in enumerate(clauses):
+            GoodClause = False
+            for variable in clause:
+                if variable1 == variable:
+                        GoodClause = True
+                        dictionaryClauses[i] = True
+                        break
+            if not GoodClause:
+                Satisfiability = False
+                dictionaryClauses[i] = False
+
+        #Try two
+        
+        for i, clause in enumerate(clauses):        
+            myVar[] = 0
+            clauseFT = 1
+            for var in clause:
+                if var < 0:
+                    myVar = (1 + 1) % 2
+                clauseFT |= myVar  
+                if clauseFT == 0:
+                    GoodClause == False
+                    return
+            if not GoodClause:
+                Satisfiability = False
+        Satisfiability = True
+            
+    #try 1
+        for i, clause in enumerate(clauses):
+            GoodClause = False
+            for variable in clause:
+                if variable > 0: 
+                    GoodClause = True
+                    dictionaryClauses[i] = True
+                    break
+            if not GoodClause:
+                Satisfiability = False
+                dictionaryClauses[i] = False
+                return (Satisfiability, {})
+            
+        Satisfiability = True
+        return (Satisfiability, dictionaryClauses)
+    #Try 3
+    # get all assignments, try one, 
+
+
+                
+
 
     def sat_bruteforce(self, n_vars:int, clauses:List[List[int]]) -> Tuple[bool, Dict[int, bool]]:
         pass
