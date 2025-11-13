@@ -70,12 +70,30 @@ class SatSolver(SatSolverAbstractClass):
                     good += 1
 
             if good == len(clauses):
-                return assigment
+                return assignment
             
-            bad = 0
-            for clause in clauses:
-                if clauseUnsatisfied(clause, assignment):
+            if any(clauseUnsatisfied(clause, assignment) for clause in clauses):
+
+                backtracked = False
+                
+                while variationsTriedStack:
+                    var, tried = variationsTriedStack.pop()
+                    if var in assignment:
+                        del assignment[var]
+                    if len(tried) < 2: 
+                        otherVal = not tried[0]
+                        tried.append(otherVal)
+                        assignment[var] = otherVal
+                        variationsTriedStack.append((var, tried))
+                        backtracked = True
+                        break
+                if not backtracked:
+                    return None
+
                     
+            var = unassigned[0]
+            assignment[var] = True
+            variationsTriedStack.append((var, [True]))            
 
 
 
