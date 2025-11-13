@@ -89,14 +89,24 @@ class SatSolver(SatSolverAbstractClass):
                         break
                 if not backtracked:
                     return None
-
+                
+            unassigned = [v for v in allVars if v not in assignment]
+            if not unassigned:
+                good = 0
+                for clause in clauses:
+                    if clauseSatisfied(clause, assignment):
+                        good += 1
+                if good == len(clauses):
+                    return assignment
+                else: 
+                    return None
                     
             var = unassigned[0]
             assignment[var] = True
             variationsTriedStack.append((var, [True]))            
 
 
-
+'''
             if not (n_vars > 0):
                  return
             
@@ -145,7 +155,7 @@ class SatSolver(SatSolverAbstractClass):
         # add that to the stack with the guess then all the types of the other variables,
         # if
         # try 3 
-        '''
+        
         variable1 = -2
         for i, clause in enumerate(clauses):
             GoodClause = False
